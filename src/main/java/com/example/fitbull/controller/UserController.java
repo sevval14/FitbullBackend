@@ -3,6 +3,8 @@ package com.example.fitbull.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,10 +37,19 @@ public class UserController {
 		return userRepository.findById(userId).orElse(null);
 	}
 	
-	@PostMapping
-	public User createUser(@RequestBody User newUser) {
-		return userRepository.save(newUser);
-	}
+	
+    @PostMapping
+    public ResponseEntity<?> createUser(@RequestBody User newUser) {
+        for (User user : getAllUsers()) {
+            if (user.getEmail().equals(newUser.getEmail())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                                     .body("Username already exists");
+            }
+        }
+
+        User savedUser = userRepository.save(newUser);
+        return ResponseEntity.ok(savedUser);
+    }
 	
 
 	@PostMapping("/{userId}")
@@ -50,6 +61,7 @@ public class UserController {
 			User foundUser = oldUser.get();
 			foundUser.setUsername(newUser.getUsername());
 			foundUser.setPassword(newUser.getPassword());	
+			foundUser.setEmail(newUser.getEmail());
 			return userRepository.save(foundUser);
 			}else {
 			return null;
