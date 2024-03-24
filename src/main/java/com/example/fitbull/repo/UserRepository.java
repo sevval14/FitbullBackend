@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.fitbull.entities.User;
 
 public interface UserRepository extends JpaRepository<User,Long>{
-	//findall save findbyıd falan entiti ile datasbe arasında etilşimi kolaylaştırı
+
+	User findByUsername(String username);
+
+	User findByEmail(String email);
 
 }
