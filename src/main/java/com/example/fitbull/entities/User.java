@@ -16,15 +16,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "user")
 @Data
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	Long id;
 	
 	String email;
 	String username;
