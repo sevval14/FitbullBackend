@@ -18,11 +18,10 @@ public class Activity {
 	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    Long id;
-	    
+	  	
 		String name;
+	    String description;
 	    String imagePath;
-	    String date;
-	    String price;
 	    
 	    @ManyToOne
 	    @JoinColumn(name = "gym_id")
@@ -45,28 +44,13 @@ public class Activity {
 			this.name = name;
 		}
 
-		public String getImagePath() {
-			return imagePath;
+		
+		public String getDescription() {
+			return description;
 		}
 
-		public void setImagePath(String imagePath) {
-			this.imagePath = imagePath;
-		}
-
-		public String getDate() {
-			return date;
-		}
-
-		public void setDate(String date) {
-			this.date = date;
-		}
-
-		public String getPrice() {
-			return price;
-		}
-
-		public void setPrice(String price) {
-			this.price = price;
+		public void setDescription(String description) {
+			this.description = description;
 		}
 
 		public Gym getGym() {
@@ -76,5 +60,14 @@ public class Activity {
 		public void setGym(Gym gym) {
 			this.gym = gym;
 		}
+
+		public String getImagePath() {
+			return imagePath;
+		}
+
+		public void setImagePath(String imagePath) {
+			this.imagePath = imagePath;
+		}
+		
 	    
 }
