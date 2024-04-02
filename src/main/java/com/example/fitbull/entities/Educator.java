@@ -1,8 +1,12 @@
 package com.example.fitbull.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,11 +26,20 @@ public class Educator {
 		String name;
 		String imagePath;
 	    String phoneNumber;
-
-	    @ManyToOne
-	    @JoinColumn(name = "gym_id")
+	    
+	    
+	    @ManyToOne(fetch=FetchType.LAZY)
+	    @JoinColumn(name="user_id",nullable=false)
+	    @OnDelete(action = OnDeleteAction.CASCADE)
+	    @JsonIgnore
+	    User user;
+	    
+	    @ManyToOne(fetch=FetchType.LAZY)
+	    @JoinColumn(name="gym_id",nullable=false)
+	    @OnDelete(action = OnDeleteAction.CASCADE)
 	    @JsonIgnore
 	    Gym gym;
+
 
 		public Long getId() {
 			return id;
@@ -60,12 +73,6 @@ public class Educator {
 			this.phoneNumber = phoneNumner;
 		}
 
-		public Gym getGym() {
-			return gym;
-		}
 
-		public void setGym(Gym gym) {
-			this.gym = gym;
-		}
 	    
 }

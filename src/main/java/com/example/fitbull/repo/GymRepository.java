@@ -1,17 +1,21 @@
 package com.example.fitbull.repo;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.fitbull.entities.Gym;
 
-import jakarta.transaction.Transactional;
 
+
+@Repository
 public interface GymRepository extends JpaRepository<Gym,Long>{
 
-	Gym findByName(String name);
 
-	@Transactional
-	void deleteByName(String name);
+	List<Gym> findByUserId(Long userId);
+
 	
 
 }
