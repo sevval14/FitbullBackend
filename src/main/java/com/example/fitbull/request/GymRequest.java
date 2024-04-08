@@ -10,7 +10,11 @@ public class GymRequest {
     String location;
     String imagePath;
     String capacity;
-    Long userId;
+    String startHour;
+    String endHour;
+    String taxNumber;
+    String webSite;
+    Long gymOwnerId;
     
 	public String getName() {
 		return name;
@@ -36,11 +40,11 @@ public class GymRequest {
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
-	public Long getUserId() {
-		return userId;
+	public Long getGymOwnerId() {
+		return gymOwnerId;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setgymOwnerId(Long gymOwnerId) {
+		this.gymOwnerId = gymOwnerId;
 	}
 	public Long getId() {
 		return id;
@@ -48,6 +52,31 @@ public class GymRequest {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getStartHour() {
+		return startHour;
+	}
+	public void setStartHour(String startHour) {
+		this.startHour = startHour;
+	}
+	public String getEndHour() {
+		return endHour;
+	}
+	public void setEndHour(String endHour) {
+		this.endHour = endHour;
+	}
+	public String getTaxNumber() {
+		return taxNumber;
+	}
+	public void setTaxNumber(String taxNumber) {
+		this.taxNumber = taxNumber;
+	}
+	public String getWebSite() {
+		return webSite;
+	}
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+	
     
     
 }

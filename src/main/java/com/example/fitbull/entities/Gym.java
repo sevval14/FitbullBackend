@@ -32,12 +32,16 @@ public class Gym {
     String location;
     String imagePath;
     String capacity;
+    String startHour;
+    String endHour;
+    String taxNumber;
+    String webSite; 
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id",nullable=false)
+    @JoinColumn(name="gym_owner_id",nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    User user;
+    GymOwner gymOwner;
     
 
     public Long getId() {
@@ -70,12 +74,39 @@ public class Gym {
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
-	public User getUser() {
-		return user;
+	public String getStartHour() {
+		return startHour;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setStartHour(String startHour) {
+		this.startHour = startHour;
 	}
+	public String getEndHour() {
+		return endHour;
+	}
+	public void setEndHour(String endHour) {
+		this.endHour = endHour;
+	}
+	public String getTaxNumber() {
+		return taxNumber;
+	}
+	public void setTaxNumber(String taxNumber) {
+		this.taxNumber = taxNumber;
+	}
+	public String getWebSite() {
+		return webSite;
+	}
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+	public GymOwner getGymOwner() {
+		return gymOwner;
+	}
+	public void setGymOwner(GymOwner gymOwner) {
+		this.gymOwner = gymOwner;
+	}
+	
+	
+	
 	
 
 }

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.fitbull.entities.GymOwner;
 import com.example.fitbull.entities.User;
 
 import lombok.Getter;
@@ -28,14 +29,28 @@ public class JwtUserDetails implements UserDetails{
 		this.username = username;
 		this.password = password;
 		this.authorities=authorities;
-		}
+	}
 	
-	public static JwtUserDetails create(User user) {
+	public static JwtUserDetails create(User user,GymOwner gymOwner ) {
 		List<GrantedAuthority> authoritiesList = new ArrayList<>(); 
-		//bizim user , admin bir sürü şeylerimiz var burda bunları birkitiyoruz birkaç çeşit login olma ihtimal
-		authoritiesList.add(new SimpleGrantedAuthority("user"));
-		return new JwtUserDetails(user.getId(),user.getEmail(),user.getUsername(),user.getPassword(),authoritiesList);
+
+		if (user != null) {
+			authoritiesList.add(new SimpleGrantedAuthority("user"));
+			return new JwtUserDetails(user.getId(),user.getEmail(),user.getUsername(),user.getPassword(),authoritiesList);
+	    } else if (gymOwner != null) {
+	        authoritiesList.add(new SimpleGrantedAuthority("gym_owner"));
+			return new JwtUserDetails(gymOwner.getId(),gymOwner.getEmail(),gymOwner.getUsername(),gymOwner.getPassword(),authoritiesList);
+	    } else {
+	        throw new IllegalArgumentException("Hem user hem de gymOwner null olamaz");
+	    }
 		
+		
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return authorities;
 	}
 	
 
@@ -59,11 +74,7 @@ public class JwtUserDetails implements UserDetails{
 		return true;
 	}
 	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		return authorities;
-	}
+
 
 	public Long getId() {
 		return id;

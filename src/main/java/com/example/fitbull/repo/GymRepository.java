@@ -14,7 +14,7 @@ import com.example.fitbull.entities.Gym;
 public interface GymRepository extends JpaRepository<Gym,Long>{
 
 
-	List<Gym> findByUserId(Long userId);
+	List<Gym> findByGymOwnerId(Long GymOwnerId);
 
 	
 
