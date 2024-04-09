@@ -9,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.fitbull.entities.Gym;
 import com.example.fitbull.entities.GymOwner;
-import com.example.fitbull.entities.User;
 import com.example.fitbull.repo.GymRepository;
 import com.example.fitbull.request.GymRequest;
 

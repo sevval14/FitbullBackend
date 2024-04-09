@@ -28,8 +28,8 @@ public class ActivityController {
 	}
 
     @GetMapping
-    public List<Activity> getAllActivities(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> gymId) {
-    	return activityService.getAllActivity(userId,gymId);
+    public List<Activity> getAllActivities(@RequestParam Optional<Long> gymOwnerId, @RequestParam Optional<Long> gymId) {
+    	return activityService.getAllActivity(gymOwnerId,gymId);
     }
 
     @PostMapping

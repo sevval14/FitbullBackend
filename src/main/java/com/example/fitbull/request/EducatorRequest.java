@@ -3,12 +3,12 @@ package com.example.fitbull.request;
 import lombok.Data;
 
 @Data
-public class ActivityRequest {
+public class EducatorRequest {
 	
-	Long id;
+    Long id;
 	String name;
-    String description;
-    String imagePath;
+	String imagePath;
+	String phoneNumber;
     Long gymOwnerId;
     Long gymId;
     
@@ -19,12 +19,7 @@ public class ActivityRequest {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -48,6 +43,12 @@ public class ActivityRequest {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
     
 }

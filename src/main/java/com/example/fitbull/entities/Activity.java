@@ -26,13 +26,12 @@ public class Activity {
 		String name;
 	    String description;
 	    String imagePath;
-	    
+
 	    @ManyToOne(fetch=FetchType.LAZY)
-	    @JoinColumn(name="user_id",nullable=false)
+	    @JoinColumn(name="gym_owner_id",nullable=false)
 	    @OnDelete(action = OnDeleteAction.CASCADE)
 	    @JsonIgnore
-	    User user;
-	    
+	    GymOwner gymOwner;
 	    
 	    @ManyToOne(fetch=FetchType.LAZY)
 	    @JoinColumn(name="gym_id",nullable=false)
@@ -74,13 +73,6 @@ public class Activity {
 			this.imagePath = imagePath;
 		}
 
-		public User getUser() {
-			return user;
-		}
-
-		public void setUser(User user) {
-			this.user = user;
-		}
 
 		public Gym getGym() {
 			return gym;
@@ -88,6 +80,14 @@ public class Activity {
 
 		public void setGym(Gym gym) {
 			this.gym = gym;
+		}
+
+		public GymOwner getGymOwner() {
+			return gymOwner;
+		}
+
+		public void setGymOwner(GymOwner gymOwner) {
+			this.gymOwner = gymOwner;
 		}
 		
 		

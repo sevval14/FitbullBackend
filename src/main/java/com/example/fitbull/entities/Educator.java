@@ -27,13 +27,13 @@ public class Educator {
 		String imagePath;
 	    String phoneNumber;
 	    
-	    
 	    @ManyToOne(fetch=FetchType.LAZY)
-	    @JoinColumn(name="user_id",nullable=false)
+	    @JoinColumn(name="gym_owner_id",nullable=false)
 	    @OnDelete(action = OnDeleteAction.CASCADE)
 	    @JsonIgnore
-	    User user;
+	    GymOwner gymOwner;
 	    
+
 	    @ManyToOne(fetch=FetchType.LAZY)
 	    @JoinColumn(name="gym_id",nullable=false)
 	    @OnDelete(action = OnDeleteAction.CASCADE)
@@ -71,6 +71,22 @@ public class Educator {
 
 		public void setPhoneNumner(String phoneNumner) {
 			this.phoneNumber = phoneNumner;
+		}
+
+		public GymOwner getGymOwner() {
+			return gymOwner;
+		}
+
+		public void setGymOwner(GymOwner gymOwner) {
+			this.gymOwner = gymOwner;
+		}
+
+		public Gym getGym() {
+			return gym;
+		}
+
+		public void setGym(Gym gym) {
+			this.gym = gym;
 		}
 
 
