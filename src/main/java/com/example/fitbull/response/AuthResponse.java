@@ -8,6 +8,8 @@ public class AuthResponse {
 	String message;
 	long userId;
 	String accessToken;
+	long gymId;
+	
 	public String getMessage() {
 		return message;
 	}
@@ -26,6 +28,13 @@ public class AuthResponse {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
+	public long getGymId() {
+		return gymId;
+	}
+	public void setGymId(long gymId) {
+		this.gymId = gymId;
+	}
+	
 
 	
 }

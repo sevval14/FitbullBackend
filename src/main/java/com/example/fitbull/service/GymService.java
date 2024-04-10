@@ -42,9 +42,13 @@ public class GymService{
 	public Gym createOneGym(GymRequest newGymRequest) {
 		
 		GymOwner gymOwner =gymOwnerService.getOneUserById(newGymRequest.getGymOwnerId());
+	
 
         if (gymOwner == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "GymOwner is null.");
+        }else if(gymOwner.getGym()!=null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "GymOwner has gym.");
+
         }
 	
 		Gym toSave = new Gym();
@@ -56,10 +60,11 @@ public class GymService{
 		toSave.setStartHour(newGymRequest.getStartHour());
 		toSave.setEndHour(newGymRequest.getEndHour());
 		toSave.setTaxNumber(newGymRequest.getTaxNumber());
+		gymOwner.setGym(toSave);
 		if(newGymRequest.getStartHour()==null){
 			toSave.setWebSite(null);
 		}else {
-			toSave.setWebSite(newGymRequest.getStartHour());
+			toSave.setWebSite(newGymRequest.getWebSite());
 		}
 		toSave.setGymOwner(gymOwner);
 		return gymRepository.save(toSave);

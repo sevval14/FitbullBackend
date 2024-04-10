@@ -136,6 +136,12 @@ public class AuthController {
 			authResponse.setMessage("Login succesfully.");
 			authResponse.setAccessToken("Bearer " + jwtToken);
 			authResponse.setUserId(user.getId());
+			if (user.getGym() == null) {
+			    authResponse.setGymId(0); 
+			}else {
+				authResponse.setGymId(user.getGym().getId());
+
+			}
 			System.out.println(authResponse);
 			return authResponse;
 

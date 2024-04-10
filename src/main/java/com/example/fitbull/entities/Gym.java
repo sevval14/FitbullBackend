@@ -37,7 +37,7 @@ public class Gym {
     String taxNumber;
     String webSite; 
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="gym_owner_id",nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
