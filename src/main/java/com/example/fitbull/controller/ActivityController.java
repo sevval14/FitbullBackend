@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.fitbull.entities.Activity;
 import com.example.fitbull.request.ActivityRequest;
+import com.example.fitbull.response.ActivityResponse;
 import com.example.fitbull.service.ActivityService;
 
 @RestController
@@ -28,12 +29,12 @@ public class ActivityController {
 	}
 
     @GetMapping
-    public List<Activity> getAllActivities(@RequestParam Optional<Long> gymOwnerId, @RequestParam Optional<Long> gymId) {
+    public List<ActivityResponse> getAllActivities(@RequestParam Optional<Long> gymOwnerId, @RequestParam Optional<Long> gymId) {
     	return activityService.getAllActivity(gymOwnerId,gymId);
     }
 
     @PostMapping
-    public Activity createActivity(@RequestBody ActivityRequest activityRequest) {
+    public ActivityResponse createActivity(@RequestBody ActivityRequest activityRequest) {
     	return activityService.createActivity(activityRequest);
     }
     
