@@ -26,6 +26,7 @@ public class Educator {
 		String name;
 		String imagePath;
 	    String phoneNumber;
+	    String branch;
 	    
 	    @ManyToOne(fetch=FetchType.LAZY)
 	    @JoinColumn(name="gym_owner_id",nullable=false)
@@ -40,7 +41,7 @@ public class Educator {
 	    @JsonIgnore
 	    Gym gym;
 
-
+	
 		public Long getId() {
 			return id;
 		}
@@ -88,6 +89,24 @@ public class Educator {
 		public void setGym(Gym gym) {
 			this.gym = gym;
 		}
+
+		public String getPhoneNumber() {
+			return phoneNumber;
+		}
+
+		public void setPhoneNumber(String phoneNumber) {
+			this.phoneNumber = phoneNumber;
+		}
+
+		public String getBranch() {
+			return branch;
+		}
+
+		public void setBranch(String branch) {
+			this.branch = branch;
+		}
+		
+		
 
 
 	    

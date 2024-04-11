@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.fitbull.entities.Educator;
 import com.example.fitbull.request.EducatorRequest;
+import com.example.fitbull.response.EducatorResponse;
 import com.example.fitbull.service.EducatorService;
 
 
@@ -30,12 +31,12 @@ public class EducatorController {
 	}
 
     @GetMapping
-    public List<Educator> getAllEducators(@RequestParam Optional<Long> gymOwnerId, @RequestParam Optional<Long> gymId) {
+    public List<EducatorResponse> getAllEducators(@RequestParam Optional<Long> gymOwnerId, @RequestParam Optional<Long> gymId) {
     	return educatorService.getAllEducators(gymOwnerId,gymId);
     }
 
     @PostMapping
-    public Educator createEducator(@RequestBody EducatorRequest educatorRequest) {
+    public EducatorResponse createEducator(@RequestBody EducatorRequest educatorRequest) {
     	return educatorService.createEducator(educatorRequest);
     }
     

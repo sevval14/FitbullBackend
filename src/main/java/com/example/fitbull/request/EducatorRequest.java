@@ -9,12 +9,20 @@ public class EducatorRequest {
 	String name;
 	String imagePath;
 	String phoneNumber;
+    String branch;
+
     Long gymOwnerId;
     Long gymId;
     
    
 	public String getName() {
 		return name;
+	}
+	public String getBranch() {
+		return branch;
+	}
+	public void setBranch(String branch) {
+		this.branch = branch;
 	}
 	public void setName(String name) {
 		this.name = name;
