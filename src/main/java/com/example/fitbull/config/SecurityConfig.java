@@ -88,6 +88,8 @@ public class SecurityConfig {
     		.permitAll()
     		.requestMatchers(HttpMethod.POST, "/educators/**")
     		.permitAll()
+    		.requestMatchers(HttpMethod.POST, "/upload_image/**")
+    		.permitAll()
     		.requestMatchers("/auth/**")
     		.permitAll()
     		.anyRequest().authenticated();

@@ -97,6 +97,7 @@ public class ActivityService {
 		ActivityResponse activityResponse = new ActivityResponse();
 		activityResponse.setId(savedActivity.getId());
 		activityResponse.setName(savedActivity.getName());
+		activityResponse.setImagePath(savedActivity.getImagePath());
 		activityResponse.setDescription(savedActivity.getDescription());
 		activityResponse.setGymId(savedActivity.getGym().getId());
 

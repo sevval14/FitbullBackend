@@ -24,7 +24,6 @@ public class GymService{
 	}
 
 
-
 	public List<Gym> getAllGym(Optional<Long> gymOwnerId) {
 		if(gymOwnerId.isPresent()) {
 			return gymRepository.findByGymOwnerId(gymOwnerId.get());
