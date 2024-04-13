@@ -60,13 +60,46 @@ public class GymService{
 		toSave.setEndHour(newGymRequest.getEndHour());
 		toSave.setTaxNumber(newGymRequest.getTaxNumber());
 		gymOwner.setGym(toSave);
-		if(newGymRequest.getStartHour()==null){
+		if(newGymRequest.getWebSite()==null){
 			toSave.setWebSite(null);
 		}else {
 			toSave.setWebSite(newGymRequest.getWebSite());
 		}
 		toSave.setGymOwner(gymOwner);
 		return gymRepository.save(toSave);
+	}
+
+
+	public Gym updateOneGym(Long gymId, GymRequest updatedGymRequest) {
+		  Gym existingGym = gymRepository.findById(gymId)
+			        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gym not found."));
+
+		   if (updatedGymRequest.getName() != null) {
+		        existingGym.setName(updatedGymRequest.getName());
+		    }
+		    if (updatedGymRequest.getLocation() != null) {
+		        existingGym.setLocation(updatedGymRequest.getLocation());
+		    }
+		    if (updatedGymRequest.getImagePath() != null) {
+		        existingGym.setImagePath(updatedGymRequest.getImagePath());
+		    }
+		    if (updatedGymRequest.getCapacity() != null) {
+		        existingGym.setCapacity(updatedGymRequest.getCapacity());
+		    }
+		    if (updatedGymRequest.getStartHour() != null) {
+		        existingGym.setStartHour(updatedGymRequest.getStartHour());
+		    }
+		    if (updatedGymRequest.getEndHour() != null) {
+		        existingGym.setEndHour(updatedGymRequest.getEndHour());
+		    }
+		    if (updatedGymRequest.getTaxNumber() != null) {
+		        existingGym.setTaxNumber(updatedGymRequest.getTaxNumber());
+		    }
+		    if (updatedGymRequest.getWebSite() != null) {
+		        existingGym.setWebSite(updatedGymRequest.getWebSite());
+		    }
+
+			    return gymRepository.save(existingGym);
 	}
 
 

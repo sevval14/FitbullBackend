@@ -80,6 +80,8 @@ public class SecurityConfig {
     		.permitAll()
     		.requestMatchers(HttpMethod.POST, "/gym/**")
     		.permitAll()
+    		.requestMatchers(HttpMethod.PUT, "/gym/**")
+    		.permitAll()
     		.requestMatchers(HttpMethod.GET, "/activities/**")
     		.permitAll()
     		.requestMatchers(HttpMethod.POST, "/activities/**")
