@@ -5,6 +5,7 @@ public class UserRequest {
 	String email;
 	String username;
 	String password;
+	Long entryId;
 	
 	public String getUsername() {
 		return username;
@@ -24,6 +25,13 @@ public class UserRequest {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public Long getEntryId() {
+		return entryId;
+	}
+	public void setEntryId(Long entryId) {
+		this.entryId = entryId;
+	}
+	
 	
 }
 

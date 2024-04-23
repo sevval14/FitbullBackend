@@ -15,6 +15,7 @@ public interface GymRepository extends JpaRepository<Gym,Long>{
 
 
 	List<Gym> findByGymOwnerId(Long GymOwnerId);
+	
 
 	
 

@@ -1,6 +1,7 @@
 package com.example.fitbull.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.core.AuthenticationException;
 
+import com.example.fitbull.entities.Gym;
+import com.example.fitbull.entities.GymEntry;
 import com.example.fitbull.entities.GymOwner;
 import com.example.fitbull.entities.User;
+import com.example.fitbull.repo.GymEntryRepository;
+import com.example.fitbull.repo.GymRepository;
 import com.example.fitbull.request.UserRequest;
 import com.example.fitbull.response.AuthResponse;
 import com.example.fitbull.security.JwtTokenProvider;
@@ -41,14 +46,17 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;
 	
 	private GymOwnerService gymOwnerService;
+	
+	private GymEntryRepository gymEntryRepository;
 
 	public AuthController(AuthenticationManager authenticationManager, UserService userService,
-			PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, GymOwnerService gymOwnerService) {
+			PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, GymOwnerService gymOwnerService, GymEntryRepository gymEntryRepository) {
 		this.authenticationManager = authenticationManager;
 		this.userService = userService;
 		this.passwordEncoder = passwordEncoder;
 		this.jwtTokenProvider = jwtTokenProvider;
 		this.gymOwnerService = gymOwnerService;
+		this.gymEntryRepository=gymEntryRepository;
 	}
 
 	@GetMapping
@@ -96,11 +104,20 @@ public class AuthController {
 			authResponse.setMessage("Email already in use.");
 			return new ResponseEntity<>(authResponse, HttpStatus.BAD_REQUEST);
 		}
-
+		
 		User user = new User();
 		user.setEmail(registerRequest.getEmail());
 		user.setUsername(registerRequest.getUsername());
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+		
+		if(registerRequest.getEntryId() ==null ) {
+			user.setGymEntry(null);
+
+		}else {
+			GymEntry entry = gymEntryRepository.findById(registerRequest.getEntryId()).orElse(null);
+			user.setGymEntry(entry);
+		}
+		
 		userService.saveOneUser(user);
 
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -122,6 +139,7 @@ public class AuthController {
 	
 	///GYM OWNER
 	
+	
 	@PostMapping("/login/gym_owner")
 	public AuthResponse loginGymOwner(@RequestBody UserRequest loginRequest) {
 
@@ -136,7 +154,7 @@ public class AuthController {
 			authResponse.setMessage("Login succesfully.");
 			authResponse.setAccessToken("Bearer " + jwtToken);
 			authResponse.setUserId(user.getId());
-			if (user.getGym() == null) {
+			if (user.getGym() == null ) {
 			    authResponse.setGymId(0); 
 			}else {
 				authResponse.setGymId(user.getGym().getId());
