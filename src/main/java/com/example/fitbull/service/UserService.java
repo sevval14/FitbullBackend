@@ -1,11 +1,15 @@
 package com.example.fitbull.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.fitbull.entities.GymEntry;
 import com.example.fitbull.entities.User;
 import com.example.fitbull.repo.UserRepository;
+import com.example.fitbull.response.GymEntryResponse;
+import com.example.fitbull.response.UserResponse;
 
 @Service
 public class UserService {
@@ -35,9 +39,31 @@ public class UserService {
 		userRepository.findById(userId);
 	}
 
-	public List<User> getAll() {
-		return userRepository.findAll();
+	public List<UserResponse> getAll() {
+		List<User> userList =userRepository.findAll();
+
+	    
+  	  return userList.stream()
+		            .map(this::convertToUserResponse)
+		            .collect(Collectors.toList()); 	
+  	  }
+	private UserResponse convertToUserResponse(User user) {
+		UserResponse response = new UserResponse();
+	    response.setId(user.getId());
+	    response.setUserName(user.getUsername());
+	    response.setEmail(user.getEmail());
+	    if(user.getGymEntry()!=null) {
+		    response.setEntryId(user.getGymEntry().getId());
+
+	    }else {
+		    response.setEntryId(0);
+
+	    }
+
+
+	    return response;
 	}
+	
 
 	public User getOneUserById(Long userId) {
 		return userRepository.findById(userId).orElse(null);

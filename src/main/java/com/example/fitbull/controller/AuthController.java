@@ -30,6 +30,7 @@ import com.example.fitbull.repo.GymEntryRepository;
 import com.example.fitbull.repo.GymRepository;
 import com.example.fitbull.request.UserRequest;
 import com.example.fitbull.response.AuthResponse;
+import com.example.fitbull.response.UserResponse;
 import com.example.fitbull.security.JwtTokenProvider;
 import com.example.fitbull.service.GymOwnerService;
 import com.example.fitbull.service.UserService;
@@ -60,7 +61,7 @@ public class AuthController {
 	}
 
 	@GetMapping
-	public List<User> getAllUsers() {
+	public List<UserResponse> getAllUsers() {
 		return userService.getAll();
 	}
 
