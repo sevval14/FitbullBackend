@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.fitbull.entities.GymEntry;
 import com.example.fitbull.request.GymEntryRequest;
+import com.example.fitbull.response.GymEntryResponse;
 import com.example.fitbull.service.GymEntryService;
 
 @RestController
@@ -27,12 +28,12 @@ public class GymEntryController {
 	}
 
     @PostMapping
-    public GymEntry addGymEntry(@RequestBody GymEntryRequest gymEntryRequest) throws Exception {
+    public GymEntryResponse addGymEntry(@RequestBody GymEntryRequest gymEntryRequest) throws Exception {
         return gymEntryService.createGymEntry(gymEntryRequest);
     }
 
     @GetMapping
-    public List<GymEntry> getAllGymEntries() {
+    public List<GymEntryResponse> getAllGymEntries() {
     	return gymEntryService.getAllGymEntries();
     }
     

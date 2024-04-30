@@ -106,7 +106,9 @@ public class SecurityConfig {
     		.permitAll()
     		.requestMatchers(HttpMethod.POST, "/gym_entries/**")
     		.permitAll()
-    		.requestMatchers("/auth/**")
+    		.requestMatchers(HttpMethod.GET, "/auth/**")
+    		.permitAll()
+    		.requestMatchers(HttpMethod.POST, "/auth/**")
     		.permitAll()
     		.anyRequest().authenticated();
     		
