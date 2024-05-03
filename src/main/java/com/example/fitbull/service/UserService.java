@@ -3,7 +3,9 @@ package com.example.fitbull.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.fitbull.entities.GymEntry;
 import com.example.fitbull.entities.User;
@@ -54,12 +56,10 @@ public class UserService {
 	    response.setEmail(user.getEmail());
 	    if(user.getGymEntry()!=null) {
 		    response.setEntryId(user.getGymEntry().getId());
-
 	    }else {
 		    response.setEntryId(0);
 
 	    }
-
 
 	    return response;
 	}
@@ -67,6 +67,23 @@ public class UserService {
 
 	public User getOneUserById(Long userId) {
 		return userRepository.findById(userId).orElse(null);
+	}
+
+	public User updateOneCustomer(Long userId, User updateUser) {
+	    User user = userRepository.findById(userId)
+	        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found."));
+
+	    if (updateUser.getEmail() != null) {
+	        user.setEmail(updateUser.getEmail());
+	    }
+	    if (updateUser.getUsername() != null) {
+	        user.setUsername(updateUser.getUsername());
+	    }
+	    if (updateUser.getPassword() != null) {
+	        user.setPassword(updateUser.getPassword());
+	    }
+
+	    return userRepository.save(user);
 	}
 
 }
