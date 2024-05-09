@@ -10,7 +10,7 @@ public class GymEntryResponse {
 	private LocalDateTime entryTime;
 	private String startWeight;
 	private String goalWeight;
-	private List<LocalDateTime> selectedDays;
+	private List<String> selectedDays;
 	private String gymName;
 	private String gymLocation;
 	private String startHour;
@@ -64,11 +64,11 @@ public class GymEntryResponse {
 		this.goalWeight = goalWeight;
 	}
 
-	public List<LocalDateTime> getSelectedDays() {
+	public List<String> getSelectedDays() {
 		return selectedDays;
 	}
 
-	public void setSelectedDays(List<LocalDateTime> selectedDays) {
+	public void setSelectedDays(List<String> selectedDays) {
 		this.selectedDays = selectedDays;
 	}
 

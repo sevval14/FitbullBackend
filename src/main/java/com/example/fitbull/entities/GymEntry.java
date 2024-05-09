@@ -38,7 +38,7 @@ public class GymEntry {
 	LocalDateTime entryTime;
 	String startWeight;
 	String goalWeight;
-	List<LocalDateTime> selectedDays;
+	List<String> selectedDays;
 
 	public Long getId() {
 		return id;
@@ -68,11 +68,11 @@ public class GymEntry {
 		this.goalWeight = goalWeight;
 	}
 
-	public List<LocalDateTime> getSelectedDays() {
+	public List<String> getSelectedDays() {
 		return selectedDays;
 	}
 
-	public void setSelectedDays(List<LocalDateTime> selectedDays) {
+	public void setSelectedDays(List<String> selectedDays) {
 		this.selectedDays = selectedDays;
 	}
 

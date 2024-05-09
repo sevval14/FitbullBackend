@@ -47,7 +47,7 @@ public class GymEntryService {
 		}
 		Gym gym = gymService.getOneGymId(gymEntryRequest.getGymId());
 		User user = userService.getOneUserById(gymEntryRequest.getUserId());
-		List<LocalDateTime> startSelectedDays = new ArrayList<>();
+		List<String> startSelectedDays = new ArrayList<>();
 		GymEntry entry = new GymEntry();
 		entry.setId(gymEntryRequest.getId());
 		entry.setUser(user);
