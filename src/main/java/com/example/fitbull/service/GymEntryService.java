@@ -16,6 +16,7 @@ import com.example.fitbull.entities.User;
 import com.example.fitbull.repo.GymEntryRepository;
 import com.example.fitbull.request.GymEntryRequest;
 import com.example.fitbull.response.GymEntryResponse;
+import com.example.fitbull.response.GymResponse;
 import com.example.fitbull.response.ServiceResponse;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
@@ -148,7 +149,7 @@ public class GymEntryService {
 		return Base64.getEncoder().encodeToString(pngData);
 	}
 
-	public GymEntry updateGymEntry(Long gymEntryId, GymEntry entry) {
+	public GymEntryResponse updateGymEntry(Long gymEntryId, GymEntry entry) {
 		GymEntry gymEntry = gymEntryRepository.findById(gymEntryId)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "GymEntry not found."));
 
@@ -161,7 +162,42 @@ public class GymEntryService {
 		if (entry.getSelectedDays() != null) {
 			gymEntry.setSelectedDays(entry.getSelectedDays());
 		}
+		GymEntry saveGymEntry = gymEntryRepository.save(gymEntry);
+		
+		GymEntryResponse gymEntryResponse = new GymEntryResponse();
+		
+		gymEntryResponse.setEndHour(saveGymEntry.getGym().getEndHour());
+		gymEntryResponse.setEntryTime(saveGymEntry.getEntryTime());
+		gymEntryResponse.setGoalWeight(saveGymEntry.getGoalWeight());
+		gymEntryResponse.setGymId(saveGymEntry.getGym().getId());
+		gymEntryResponse.setGymLocation(saveGymEntry.getGym().getLocation());
+		gymEntryResponse.setGymName(saveGymEntry.getGym().getName());
+		gymEntryResponse.setId(saveGymEntry.getId());
+		gymEntryResponse.setSelectedDays(saveGymEntry.getSelectedDays());
+		gymEntryResponse.setStartHour(saveGymEntry.getGym().getStartHour());
+		gymEntryResponse.setStartWeight(saveGymEntry.getStartWeight());
+		gymEntryResponse.setUserId(saveGymEntry.getUser().getId());
 
-		return gymEntryRepository.save(gymEntry);
+		return gymEntryResponse;
+	}
+
+	public GymEntryResponse getOneGymEntry(Long userId) {
+	
+		GymEntry findGymEntry = gymEntryRepository.findByUserId(userId);
+		GymEntryResponse gymEntryResponse = new GymEntryResponse();
+
+		gymEntryResponse.setEndHour(findGymEntry.getGym().getEndHour());
+		gymEntryResponse.setEntryTime(findGymEntry.getEntryTime());
+		gymEntryResponse.setGoalWeight(findGymEntry.getGoalWeight());
+		gymEntryResponse.setGymId(findGymEntry.getGym().getId());
+		gymEntryResponse.setGymLocation(findGymEntry.getGym().getLocation());
+		gymEntryResponse.setGymName(findGymEntry.getGym().getName());
+		gymEntryResponse.setId(findGymEntry.getId());
+		gymEntryResponse.setSelectedDays(findGymEntry.getSelectedDays());
+		gymEntryResponse.setStartHour(findGymEntry.getGym().getStartHour());
+		gymEntryResponse.setStartWeight(findGymEntry.getStartWeight());
+		gymEntryResponse.setUserId(findGymEntry.getUser().getId());
+				
+		return gymEntryResponse;
 	}
 }

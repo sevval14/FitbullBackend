@@ -43,7 +43,12 @@ public class GymEntryController {
     }
 
     @PutMapping("/{gymEntryId}")
-    public GymEntry updateOneGymEntry(@PathVariable Long gymEntryId, @RequestBody GymEntry entry) {
+    public GymEntryResponse updateOneGymEntry(@PathVariable Long gymEntryId, @RequestBody GymEntry entry) {
         return gymEntryService.updateGymEntry(gymEntryId, entry);
+    }
+    
+    @GetMapping("/{userId}")
+    public GymEntryResponse getOneGymEntry(@PathVariable Long userId) {
+        return gymEntryService.getOneGymEntry(userId);
     }
 }
